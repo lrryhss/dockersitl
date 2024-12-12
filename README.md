@@ -21,19 +21,35 @@ Contains the configuration for building the Docker image with all necessary depe
 ### 2. start_sitl.sh
 A bash script that initializes the SITL environment with proper networking configuration.
 
+
 ## Quick Start
 
-1. Create the start script:
+1. Create the start script (choose one of the following options):
+
+### Default location:
 ```bash
 echo '#!/bin/bash
 sim_vehicle.py -v ArduCopter --console --map --out=tcpin:0.0.0.0:14550 --out=tcpin:0.0.0.0:14551' > start_sitl.sh
 ```
+
+### Custom location:
+```bash
+echo '#!/bin/bash
+sim_vehicle.py -v ArduCopter --console --map --out=tcpin:0.0.0.0:14550 --out=tcpin:0.0.0.0:14551 --custom-location=LAT,LON,ALT,HEADING' > start_sitl.sh
+```
+
+Parameters for custom location:
+- LAT: Latitude in decimal degrees
+- LON: Longitude in decimal degrees
+- ALT: Altitude in meters above sea level
+- HEADING: Initial heading in degrees (0-360)
 
 2. Make it executable:
 ```bash
 chmod +x start_sitl.sh
 ```
 
+Let me know if you would like me to add any additional information about location configuration!
 3. Build the Docker image:
 ```bash
 docker build -t ardupilot-sitl .
